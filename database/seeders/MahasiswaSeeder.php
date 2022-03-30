@@ -13,6 +13,5 @@ class MahasiswaSeeder extends Seeder
      */
     public function run()
     {
-        //
     }
 }

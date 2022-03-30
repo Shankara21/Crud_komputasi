@@ -2,11 +2,29 @@
 @section('content')
 <div class="row">
     <div class="col-lg-12 margin-tb">
-        <div class="pull-left mt-2">
-            <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
-        </div>
-        <div class="float-right my-2">
+        <a href="/mahasiswa" style="text-decoration: none;color:black">
+            <div class="pull-left mt-2">
+                <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
+            </div>
+        </a>
+        <div class="d-flex justify-content-end mb-2">
             <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
+
+        </div>
+        <div class="d-flex justify-content-end">
+            <a class="btn btn-success" href="/show"> Menampilkan 3 data mahasiswa</a>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="/mahasiswa">
+                    <div class="input-group mb-3 mt-3">
+                        <input type="text" class="form-control" placeholder="Masukkan Nama Mahasiswa" name="search"
+                            value="{{ request('search') }}">
+                        <button class="btn btn-outline-success" type="submit" id="button-addon2"><img
+                                src="{{ asset('img/search.png') }}" alt="" height="25px"></button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -21,14 +39,20 @@
         <th>Nama</th>
         <th>Kelas</th>
         <th>Jurusan</th>
+        <th>Email</th>
+        <th>Alamat</th>
+        <th>Tanggal lahir</th>
         <th width="280px">Action</th>
     </tr>
-    @foreach ($mahasiswa as $mhs)
+    @foreach ($post as $mhs)
     <tr>
         <td>{{ $mhs ->nim }}</td>
         <td>{{ $mhs ->nama }}</td>
         <td>{{ $mhs ->kelas }}</td>
         <td>{{ $mhs ->jurusan }}</td>
+        <td>{{ $mhs ->email }}</td>
+        <td>{{ $mhs ->alamat }}</td>
+        <td>{{ $mhs ->tgl_lahir }}</td>
         <td>
             <form action="{{ route('mahasiswa.destroy',['mahasiswa'=>$mhs->nim]) }}" method="POST">
                 <a class="btn btn-info" href="{{ route('mahasiswa.show',$mhs->nim) }}">Show</a>
@@ -41,4 +65,8 @@
     </tr>
     @endforeach
 </table>
+
+<div class="d-flex justify-content-center">
+    {{ $post -> links() }}
+</div>
 @endsection

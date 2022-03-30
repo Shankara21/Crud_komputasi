@@ -16,9 +16,15 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        $mahasiswa = $mahasiswa = DB::table('mahasiswas')->get();
-        $post = Mahasiswa::orderBy('nim', 'desc')->paginate(6);
-        return view('mahasiswa.index', compact('mahasiswa'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $mahasiswa = $mahasiswa = DB::table('mahasiswas');
+        $post = Mahasiswa::latest();
+        if (request('search')) {
+            $post->where('nama', 'like', '%' . request('search') . '%');
+        }
+        return view('mahasiswa.index', [
+            'mahasiswa' => $mahasiswa,
+            'post' => $post->paginate(6),
+        ]);
     }
 
     /**
@@ -44,6 +50,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
+            'email' => 'required',
+            'alamat' => 'required',
+            'tgl_lahir' => 'required',
         ]);
         Mahasiswa::create($request->all());
         return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil ditambahkan');
@@ -87,6 +96,9 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
+            'email' => 'required',
+            'alamat' => 'required',
+            'tgl_lahir' => 'required',
         ]);
         Mahasiswa::where('id_mahasiswa', $mahasiswa->id_mahasiswa)->update($validateData);
         return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil diubah');
