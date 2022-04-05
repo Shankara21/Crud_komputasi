@@ -13,11 +13,11 @@ class Menambah3KolomBaru extends Migration
      */
     public function up()
     {
-        Schema::table('mahasiswas', function (Blueprint $table) {
-            $table->string('email', 100)->nullable();
-            $table->string('alamat', 100)->nullable();
-            $table->date('tgl_lahir')->nullable();
-        });
+        // Schema::table('mahasiswas', function (Blueprint $table) {
+        //     $table->string('email', 100)->nullable();
+        //     $table->string('alamat', 100)->nullable();
+        //     $table->date('tgl_lahir')->nullable();
+        // });
     }
 
     /**

@@ -10,6 +10,10 @@ class Mahasiswa extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function kelas()
+    {
+        return $this->belongsTo(Kelas::class);
+    }
     public function getRouteKeyName()
     {
         return 'nim';
