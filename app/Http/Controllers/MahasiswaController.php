@@ -20,9 +20,6 @@ class MahasiswaController extends Controller
         // ! TUGAS MINGGU 7
         // $mahasiswa = $mahasiswa = DB::table('mahasiswas');
         // $post = Mahasiswa::latest();
-        // if (request('search')) {
-        //     $post->where('nama', 'like', '%' . request('search') . '%');
-        // }
         // return view('mahasiswa.index', [
         //     'mahasiswa' => $mahasiswa,
         //     'post' => $post->paginate(6),
@@ -30,10 +27,16 @@ class MahasiswaController extends Controller
 
         // ! TUGAS MINGGU 8
         $mahasiswa = Mahasiswa::with('kelas')->get();
-        $paginate = Mahasiswa::orderBy('id_mahasiswa', 'asc')->paginate(3);
+        $paginate = Mahasiswa::orderBy('id_mahasiswa', 'asc');
+        $search = Mahasiswa::all();
+        if (request('search')) {
+            $paginate->where('nama', 'like', '%' . request('search') . '%')
+                ->orWhere('nim', 'like', '%' . request('search') . '%');
+        }
         return view('mahasiswa.index', [
             'mahasiswa' => $mahasiswa,
-            'paginate' => $paginate,
+            'paginate' => $paginate->paginate(3),
+
         ]);
     }
 

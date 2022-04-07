@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MataKuliah_mahasiswaController;
 use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('/mahasiswa', MahasiswaController::class);
 Route::get('/show', [ShowController::class, 'show']);
+Route::get('/nilai/{mahasiswa}', [MataKuliah_mahasiswaController::class, 'index']);

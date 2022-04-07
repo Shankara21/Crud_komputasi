@@ -16,7 +16,7 @@ class MahasiswaFactory extends Factory
         return [
             'nim' => $this->faker->unique()->randomNumber(9),
             'nama' => $this->faker->name,
-
+            'kelas_id' => $this->faker->numberBetween(1, 5),
             'jurusan' => $this->faker->randomElement(['Jurusan Teknologi Informasi']),
             // 'email' => $this->faker->email,
             // 'alamat' => $this->faker->address,
