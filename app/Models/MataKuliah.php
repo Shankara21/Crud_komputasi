@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Mahasiswa;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MataKuliah extends Model
 {
     use HasFactory;
     protected $table = 'matakuliah';
-    public function mahasiswa_matakuliah()
+    protected $primaryKey = 'id';
+    public function mahasiswa()
     {
-        return $this->hasMany(Mahasiswa_MataKuliah::class);
+        return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_matakuliah', 'matakuliah_id', 'mahasiswa_id')->withPivot('nilai');
     }
 }

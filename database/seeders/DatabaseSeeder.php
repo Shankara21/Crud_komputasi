@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             MataKuliahSeeder::class,
 
         ]);
-        Mahasiswa::factory(10)->create();
+        Mahasiswa::factory(30)->create();
         Mahasiswa::create([
             'nim' => '2041720114',
             'nama' => 'Muhammad Lazuardi Timur',

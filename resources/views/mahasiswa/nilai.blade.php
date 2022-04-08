@@ -14,6 +14,8 @@
     <p><strong>NIM : </strong> {{ $mhs-> nim }}</p>
     <p><strong>Kelas : </strong> {{$mhs -> kelas -> nama_kelas }}</p>
 </div>
+@php
+@endphp
 <table class="table">
     <thead>
         <tr>
@@ -24,12 +26,12 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($tes as $item)
+        @foreach ($mhs -> matakuliah as $item)
         <tr>
-            <th scope="row">{{ $item -> matakuliah -> nama_matkul }}</th>
-            <td>{{ $item -> matakuliah -> sks }}</td>
-            <td>{{ $item -> matakuliah -> semester }}</td>
-            <td>{{ $item -> nilai }}</td>
+            <th scope="row">{{ $item -> nama_matkul }}</th>
+            <td>{{ $item -> sks }}</td>
+            <td>{{ $item -> semester }}</td>
+            <td>{{ $item -> pivot -> nilai }}</td>
         </tr>
         @endforeach
 
