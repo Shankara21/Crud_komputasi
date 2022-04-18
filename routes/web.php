@@ -19,3 +19,4 @@ use Illuminate\Support\Facades\Route;
 Route::resource('/mahasiswa', MahasiswaController::class);
 Route::get('/show', [ShowController::class, 'show']);
 Route::get('/nilai/{mahasiswa}', [MataKuliah_mahasiswaController::class, 'index']);
+Route::get('/cetak_pdf/{mahasiswa}', [MataKuliah_mahasiswaController::class, 'pdf']);

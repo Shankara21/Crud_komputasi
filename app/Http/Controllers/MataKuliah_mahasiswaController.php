@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Mahasiswa_MataKuliah;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
+use PDF;
 
 class MataKuliah_mahasiswaController extends Controller
 {
@@ -21,5 +22,11 @@ class MataKuliah_mahasiswaController extends Controller
         return view('mahasiswa.nilai', [
             'mhs' => $Mahasiswa,
         ]);
+    }
+    public function pdf(Mahasiswa $mahasiswa)
+    {
+        $mhs = $mahasiswa;
+        $pdf = PDF::loadview('mahasiswa.export', compact('mhs'));
+        return $pdf->stream();
     }
 }

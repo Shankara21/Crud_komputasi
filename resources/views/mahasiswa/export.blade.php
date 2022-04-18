@@ -38,7 +38,4 @@
 
     </tbody>
 </table>
-<div class="text-center">
-    <a href="/cetak_pdf/{{ $mhs -> nim }}" class="btn btn-danger"> Cetak PDF</a>
-</div>
 @endsection
