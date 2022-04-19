@@ -21,12 +21,13 @@ class DatabaseSeeder extends Seeder
             MataKuliahSeeder::class,
 
         ]);
-        Mahasiswa::factory(30)->create();
+        // Mahasiswa::factory(30)->create();
         Mahasiswa::create([
             'nim' => '2041720114',
             'nama' => 'Muhammad Lazuardi Timur',
             'kelas_id' => 5,
             'jurusan' => 'Teknik Informatika',
+            'foto' => 'default.png',
         ]);
         $this->call([
 

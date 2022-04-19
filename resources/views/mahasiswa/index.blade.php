@@ -36,6 +36,7 @@
 <table class="table table-bordered">
     <tr>
         <th>Nim</th>
+        <th>Foto</th>
         <th>Nama</th>
         <th>Kelas</th>
         {{-- <th>Jurusan</th>
@@ -47,6 +48,8 @@
     @foreach ($paginate as $mhs)
     <tr>
         <td>{{ $mhs ->nim }}</td>
+        <td><img src="{{ asset('storage/'.$mhs -> foto) }}" alt="" height="150px" width="150px" class="rounded"
+                style="object-fit: cover"></td>
         <td>{{ $mhs ->nama }}</td>
         <td>{{ $mhs->kelas->nama_kelas }}</td>
         <td>{{ $mhs ->jurusan }}</td>

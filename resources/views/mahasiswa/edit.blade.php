@@ -1,6 +1,6 @@
 @extends('mahasiswa.layout')
 @section('content')
-<div class="container mt-5">
+<div class="container mt-3">
     <div class="row justify-content-center align-items-center">
         <div class="card" style="width: 24rem;">
             <div class="card-header">
@@ -17,7 +17,8 @@
                     </ul>
                 </div>
                 @endif
-                <form method="post" action="{{ route('mahasiswa.update', $Mahasiswa->nim) }}" id="myForm">
+                <form method="post" action="{{ route('mahasiswa.update', $Mahasiswa->nim) }}" id="myForm"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -42,6 +43,13 @@
                         <label for="Jurusan">Jurusan</label>
                         <input type="Jurusan" name="jurusan" class="form-control" id="Jurusan"
                             value="{{ $Mahasiswa->jurusan }}" aria-describedby="Jurusan">
+                    </div>
+                    <div class="form-group">
+                        <label for="Jurusan">Foto</label>
+                        <input type="file" name="foto" class="form-control" id="Jurusan" ariadescribedby="Jurusan"
+                            value="{{ $Mahasiswa -> foto }}">
+                        <img width="150px" src="{{asset('storage/'.$Mahasiswa -> foto)}}"
+                            alt="{{ $Mahasiswa -> foto }}">
                     </div>
                     {{-- <div class="form-group">
                         <label for="Jurusan">Email</label>

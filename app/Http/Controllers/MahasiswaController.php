@@ -7,6 +7,7 @@ use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class MahasiswaController extends Controller
 {
@@ -61,12 +62,16 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validateData = $request->validate([
             'nim' => 'required',
             'nama' => 'required',
             'kelas_id' => 'required',
             'jurusan' => 'required',
+            'foto' => 'required',
         ]);
+        if ($request->file('foto')) {
+            $validateData['foto'] = $request->file('foto')->store('images', 'public');
+        }
         // $mahasiswa = new Mahasiswa;
         // $mahasiswa->nim = $request->get('nim');
         // $mahasiswa->nama = $request->get('nama');
@@ -80,7 +85,7 @@ class MahasiswaController extends Controller
         // $mahasiswa->kelas()->associate($kelas);
         // $mahasiswa->save();
 
-        Mahasiswa::create($request->all());
+        Mahasiswa::create($validateData);
         return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil ditambahkan');
     }
 
@@ -123,10 +128,16 @@ class MahasiswaController extends Controller
             'nama' => 'required',
             'kelas_id' => 'required',
             'jurusan' => 'required',
+            'foto' => 'required',
             // 'email' => 'required',
             // 'alamat' => 'required',
             // 'tgl_lahir' => 'required',
         ]);
+        if ($mahasiswa->foto && file_exists(storage_path('app/public/' . $mahasiswa->foto))) {
+            Storage::delete('public/' . $mahasiswa->foto);
+        }
+        $foto = $request->file('foto')->store('images', 'public');
+        $validateData['foto'] = $foto;
         Mahasiswa::where('id_mahasiswa', $mahasiswa->id_mahasiswa)->update($validateData);
         return redirect()->route('mahasiswa.index')->with('success', 'Data berhasil diubah');
     }
